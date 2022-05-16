@@ -6,14 +6,18 @@
   scroll-behavior: smooth;
 }
 
-
-/* ScrollBar */
+a {
+  display: inherit;
+  align-items: center;
+  text-decoration: none;
+}
 
 ::-webkit-scrollbar {
   max-width: 10px;
 }
 
 ::-webkit-scrollbar-track {
+  border-radius: 10px;
   background: #bbb;
   filter: opacity(0%);
 }
@@ -22,9 +26,6 @@
   background: #3f37c9;
   border-radius: 10px;
 }
-
-
-/* ScrollBar End */
 
 
 /* Button to up */
@@ -59,6 +60,11 @@ body {
   font-family: "Andada Pro", serif;
 }
 
+body.overlay {
+  display: block;
+  overflow: hidden;
+}
+
 .nav-header {
   padding: 0;
   position: fixed;
@@ -71,45 +77,65 @@ body {
 /* Navbar */
 
 nav {
-  width: inherit;
+  padding: 1rem 2rem;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
   font-family: "Cormorant Garamond", serif;
   font-size: 1.1em;
 }
 
-.mobile-nav,
-.mobile-nav-item {
-  display: none;
-}
-
 .nav-brand {
-  margin: 1rem;
   color: white;
   font-size: 2rem;
   font-family: "Playfair Display", serif;
+}
+
+.hamburger {
+  display: none;
+}
+
+.hamburger::before {
+  content: "\f0c9";
+  width: 100%;
+  height: 100%;
+  font-weight: 900;
+  font-family: "Font Awesome 6 Free";
+}
+
+.hamburger.overlay::before {
+  content: "\f00d";
+  width: 100%;
+  height: 100%;
+  font-size: 1.2rem;
+  font-weight: 900;
+  font-family: "Font Awesome 6 Free";
+}
+
+.hamburger.overlay:active {
+  transform: rotate(360deg);
+  transition: transform 1s ease;
+}
+
+.nav-item.overlay {
+  display: flex;
 }
 
 .nav-item {
   display: flex;
   font-size: 1.1em;
   font-weight: bold;
-  gap: 50px;
 }
 
 .nav-item a {
+  padding: 7px 20px;
   color: #fbf8cc;
 }
 
-a {
-  display: inherit;
-  align-items: center;
-  text-decoration: none;
-}
-
 .nav-item a:hover {
-  padding: 7px 20px;
   display: inherit;
   align-items: center;
   background-color: #90e0ef;
@@ -121,7 +147,7 @@ a {
 /* Navbar End */
 
 main {
-  padding-top: 5rem;
+  padding-top: calc(5rem - 5vh);
   overflow: auto;
 }
 
@@ -133,7 +159,7 @@ main {
 
 #content h1 {
   padding-bottom: 10px;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 #content article {
@@ -188,38 +214,38 @@ aside figure img {
   border-radius: 50%;
 }
 
-aside .sosmed {
+.sosmed {
   margin: 1.1em;
   padding: 0 20%;
   font-size: 1.1em;
 }
 
-aside .sosmed:hover {
+.sosmed:hover {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   border-radius: 5px;
-  background-color: #ccc;
-  transition: 0.25s ease-out;
+  background-color: #ddd;
+  transition: 0.1s ease-in;
   box-shadow: 3px 7px 10px #000;
   transform: scale(1.1);
   font-size: 1em;
 }
 
-aside .sosmed h4 {
+.sosmed h4 {
   padding: 10px;
   font-size: 1em;
   text-align: center;
 }
 
-aside .sosmed a {
+.sosmed a {
+  padding: 0 1.2em;
   display: flex;
   align-items: center;
 }
 
-aside .sosmed a:hover {
+.sosmed a:hover {
   border: 1px solid #eee;
   border-radius: 50px 0;
-  padding: 0 1.2em;
   color: #f26400;
   transition: 0.7s;
 }
@@ -230,27 +256,27 @@ aside .sosmed a:hover {
   width: 20px;
 }
 
-.sosmed a[href*="https://facebook.com/BryanKazuro04/"] {
+.sosmed .sosmed-link:nth-child(2) {
   color: #1877f2;
 }
 
-.sosmed a[href*="https://www.instagram.com/bryan.kazuro/"] {
+.sosmed .sosmed-link:nth-child(3) {
   color: #be0aff;
 }
 
-.sosmed a[href*="https://github.com/bryankazuro04/"] {
+.sosmed .sosmed-link:nth-child(4) {
   color: #444c56;
 }
 
-.sosmed a[href*="https://www.linkedin.com/in/muhammad-alana-fauzan-34b72b220/"] {
+.sosmed .sosmed-link:nth-child(5) {
   color: #063e7a;
 }
 
-.sosmed a[href*="https://wa.me/+6282119760841/?text=Hi, Nice to Meet You"] {
+.sosmed .sosmed-link:nth-child(6) {
   color: #4ac959;
 }
 
-.sosmed a[href*="mailto:f2251a210@dicoding.org"] {
+.sosmed .sosmed-link:nth-child(7) {
   color: #da2525;
 }
 
@@ -271,7 +297,13 @@ footer p:hover {
   text-shadow: 0 0 20px #f72585;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+  .nav-brand {
+    margin: 0.5rem;
+  }
+  .nav-item {
+    gap: 20px;
+  }
   #content {
     padding: 1.5em;
   }
@@ -281,64 +313,18 @@ footer p:hover {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .desktop-nav {
-    display: none;
-  }
-  .mobile-nav {
-    padding: 1em 1.5em;
-    width: 100vw;
-    display: inline-flex;
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  nav {
     justify-content: space-between;
-    align-items: center;
   }
-  .mobile-nav .nav-brand {
-    margin: 0;
+  .hamburger {
+    display: block;
   }
-  .mobile-nav-item {
-    margin: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    background: #888;
-    opacity: 0.95;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 3em;
-    font-size: 1.7em;
-    z-index: 99;
-    visibility: hidden;
-  }
-  .mobile-nav-item.active {
-    visibility: visible;
-  }
-  .mobile-nav-item.active~#btn-to-top {
+  .nav-item {
+    margin: 1rem;
     display: none;
-  }
-  .mobile-nav .toggle-nav {
-    border: none;
-    border-radius: 10%;
-    width: 40px;
-    height: 40px;
-    background-color: #ade8f4;
-    z-index: 9999;
-  }
-  .mobile-nav .toggle-nav::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 50px;
     width: 100%;
-    height: 100%;
-    transition: 0.5s;
-  }
-  .mobile-nav .toggle-nav.active::before {
-    position: absolute;
+    justify-content: flex-end;
   }
   #content,
   aside {
@@ -355,67 +341,29 @@ footer p:hover {
     right: 25px;
     bottom: 50px;
   }
-  .desktop-nav {
-    display: none;
-  }
-  .mobile-nav {
-    padding: 1em 1.5em;
-    width: 100vw;
-    display: inline-flex;
+  nav {
     justify-content: space-between;
-    align-items: center;
   }
-  .mobile-nav .nav-brand {
-    margin: 0;
+  .nav-brand {
+    font-size: 1.2em;
   }
-  .mobile-nav-item {
-    margin: 0;
-    position: fixed;
-    top: 0;
+  .hamburger {
+    display: block;
+  }
+  .nav-item {
+    margin-bottom: 1rem;
     width: 100%;
-    height: 100vh;
-    background: #888;
-    opacity: 0.95;
-    display: flex;
+    display: none;
+    gap: 20px;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 3em;
-    font-size: 1.7em;
-    z-index: 99999 !important;
-    visibility: hidden;
-  }
-  .mobile-nav-item.active {
-    visibility: visible;
-  }
-  .mobile-nav-item.active~#btn-to-top {
-    display: none;
-  }
-  .mobile-nav .toggle-nav {
-    border: none;
-    border-radius: 10%;
-    width: 40px;
-    height: 40px;
-    background-color: #ade8f4;
-    z-index: 9999;
-  }
-  .mobile-nav .toggle-nav::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 50px;
-    width: 100%;
-    height: 100%;
-    transition: 0.5s;
-  }
-  .mobile-nav .toggle-nav.active::before {
-    position: absolute;
   }
   #content {
-    padding: 2em 10px;
+    padding: 2em 0;
     width: 100%;
+  }
+  #content h1 {
+    font-size: 1.4em;
   }
   aside {
     margin: 0;
@@ -424,5 +372,8 @@ footer p:hover {
   }
   aside figure img {
     width: 40%;
+  }
+  footer p {
+    font-size: 1rem;
   }
 }

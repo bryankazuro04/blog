@@ -1,13 +1,3 @@
-// Mobile Navbar Overlay
-const navbarToggle = document.querySelector(".toggle-nav");
-const overlayToggle = document.querySelector(".mobile-nav-item");
-
-navbarToggle.onclick = function() {
-  navbarToggle.classList.toggle("active");
-  navbarToggle.innerHTML = '<i class="fa-solid fa-angle-down"></i>';
-  overlayToggle.classList.toggle("active");
-};
-
 // Button To Up
 let progress = document.getElementById("progressbar");
 let totalHeight = document.body.scrollHeight - window.innerHeight;
@@ -24,6 +14,7 @@ function scrollUp() {
     document.documentElement.scrollTop > 500
   ) {
     document.getElementById("btn-to-top").style.display = "block";
+    document.getElementById("btn-to-top").style.zIndex = "99";
   } else {
     document.getElementById("btn-to-top").style.display = "none";
   }
@@ -33,3 +24,12 @@ function topUp() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+const hamburger = document.querySelector(".hamburger");
+const menuNav = document.querySelector(".nav-item");
+
+hamburger.addEventListener("click", () => {
+  menuNav.classList.toggle("overlay");
+  hamburger.classList.toggle("overlay");
+  document.body.classList.toggle("overlay");
+});
